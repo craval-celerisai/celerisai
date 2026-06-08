@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CelerisAI — A New Era in Heart Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0d1b2a;
+    --blue:       #1e5fa3;
+    --blue-light: #4287c8;
+    --blue-pale:  #eaf3fc;
+    --blue-mid:   #d0e7f8;
+    --gold:       #b87318;
+    --gold-pale:  #fdf4e3;
+    --gold-mid:   #f5dfa8;
+    --green-pale: #eaf7f0;
+    --red-pale:   #fdeaea;
+    --grey-pale:  #f5f7fa;
+    --border:     #dde3ec;
+    --text:       #1a1a2e;
+    --muted:      #5b6472;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 80px 24px 72px;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.1;
+    max-width: 860px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.25s forwards;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--blue); }
+
+  .hero-sub {
+    font-size: clamp(0.98rem, 2vw, 1.15rem);
+    color: var(--muted);
+    max-width: 600px;
+    margin: 24px auto 0;
+    line-height: 1.78;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.42s forwards;
+  }
+
+  .hero-badge {
+    margin-top: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--blue-pale);
+    border: 1px solid var(--blue-mid);
+    border-radius: 40px;
+    padding: 9px 22px;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.62s forwards;
+  }
+
+  .hero-badge span {
+    width: 6px; height: 6px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ── STAT BAND ── */
+  .stat-band {
+    background: var(--grey-pale);
+    padding: 64px 24px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .stat-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--blue);
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 2px 14px rgba(30,95,163,0.07);
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+
+  .stat-card:hover {
+    box-shadow: 0 8px 28px rgba(30,95,163,0.12);
+    transform: translateY(-3px);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .stat-number sup { font-size: 1.3rem; vertical-align: super; color: var(--blue); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .stat-sub {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-mid);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── SHARED SECTION STYLES ── */
+  .section-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 96px 24px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .section-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 28px;
+  }
+
+  .divider {
+    width: 52px; height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin: 20px 0 28px;
+  }
+
+  .body-p {
+    font-size: 1.04rem;
+    line-height: 1.85;
+    color: #374151;
+    margin-bottom: 20px;
+    font-weight: 300;
+    max-width: 720px;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--blue-pale);
+    border: 1px solid var(--blue-mid);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 12px 12px 0;
+    padding: 22px 28px;
+    margin: 36px 0;
+  }
+
+  .info-box p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.12rem;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.65;
+    margin-bottom: 0;
+  }
+
+  .info-box cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .gold-box {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-mid);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 22px 28px;
+    margin: 36px 0;
+  }
+
+  .gold-box p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.65;
+    margin-bottom: 0;
+  }
+
+  .gold-box cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── MECH SECTION ── */
+  .mech-section {
+    background: var(--grey-pale);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 700px) { .mech-grid { grid-template-columns: 1fr; } }
+
+  .mech-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+
+  .mech-card:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+    transform: translateY(-3px);
+  }
+
+  .mech-card.blue-card {
+    border-top: 4px solid var(--blue);
+    background: linear-gradient(180deg, var(--blue-pale) 0%, #ffffff 60%);
+  }
+
+  .mech-card.gold-card {
+    border-top: 4px solid var(--gold);
+    background: linear-gradient(180deg, var(--gold-pale) 0%, #ffffff 60%);
+  }
+
+  .mech-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+
+  .mech-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+
+  .mech-card.blue-card h3 { color: var(--blue); }
+  .mech-card.gold-card h3 { color: var(--gold); }
+
+  .mech-card p {
+    font-size: 0.97rem;
+    line-height: 1.78;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+
+  .mech-bullets { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+
+  .mech-bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #374151;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  .mech-bullet::before { content: '→'; flex-shrink: 0; margin-top: 1px; font-weight: 500; }
+  .mech-card.blue-card .mech-bullet::before { color: var(--blue); }
+  .mech-card.gold-card .mech-bullet::before { color: var(--gold); }
+
+  /* ── COMPARISON ── */
+  .compare-section { background: #ffffff; }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 44px;
+    font-size: 0.92rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+  }
+
+  .compare-table thead th {
+    padding: 14px 16px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--grey-pale);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .compare-table thead th:first-child { text-align: left; padding-left: 24px; }
+
+  .compare-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.18s; }
+  .compare-table tbody tr:last-child { border-bottom: none; }
+  .compare-table tbody tr:hover { background: var(--grey-pale); }
+
+  .compare-table tbody tr.highlight-row { background: var(--blue-pale); }
+  .compare-table tbody tr.highlight-row:hover { background: var(--blue-mid); }
+
+  .compare-table td {
+    padding: 16px;
+    color: #374151;
+    text-align: center;
+    font-weight: 300;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+
+  .compare-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: var(--navy);
+    padding-left: 24px;
+  }
+
+  .compare-table tr.highlight-row td:first-child { color: var(--blue); }
+  .compare-table tr.highlight-row td { color: var(--navy); }
+
+  .check  { color: #16a34a; font-size: 1.05rem; font-weight: 700; }
+  .cross  { color: #dc2626; font-size: 1.05rem; }
+  .partial{ color: #d97706; font-size: 1.05rem; }
+
+  /* ── TAM ── */
+  .tam-section {
+    background: var(--grey-pale);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tam-bars {
+    display: flex;
+    gap: 20px;
+    margin-top: 52px;
+    align-items: flex-end;
+    height: 260px;
+  }
+
+  .tam-bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .tam-bar {
+    width: 100%;
+    border-radius: 10px 10px 4px 4px;
+    transition: opacity 0.25s;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .tam-bar:hover { opacity: 0.82; }
+
+  .tam-bar-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .tam-bar-name {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  .tam-total {
+    margin-top: 40px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--blue);
+    border-radius: 0 16px 16px 0;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 14px rgba(30,95,163,0.07);
+  }
+
+  .tam-total-label { color: var(--muted); font-size: 13px; font-weight: 400; margin-bottom: 4px; }
+
+  .tam-total-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--navy);
+  }
+
+  .tam-total-desc { color: var(--muted); font-size: 13px; max-width: 380px; line-height: 1.65; font-weight: 300; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--blue-pale);
+    border-top: 1px solid var(--blue-mid);
+    padding: 96px 24px;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 900;
+    color: var(--navy);
+    max-width: 700px;
+    margin: 0 auto 20px;
+    line-height: 1.15;
+  }
+
+  .cta-section h2 em { font-style: italic; color: var(--blue); }
+
+  .cta-section p {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto 44px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--blue);
+    color: #fff;
+    padding: 15px 34px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.22s, transform 0.18s;
+    display: inline-block;
+    box-shadow: 0 4px 16px rgba(30,95,163,0.2);
+  }
+
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+  .btn-secondary {
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    background: #ffffff;
+    padding: 15px 34px;
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.22s, transform 0.18s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { background: var(--blue-mid); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 44px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .footer-logo span { color: #93c5fd; }
+
+  .footer-tagline {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .footer-contact {
+    margin-top: 22px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+    line-height: 2;
+  }
+
+  .footer-contact a { color: #93c5fd; text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(1.5); }
+  }
+
+  @media (max-width: 600px) {
+    .tam-bars { height: 200px; gap: 12px; }
+    .tam-total { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">CelerisAI · Program 2 · Scientific &amp; Commercial Overview</p>
+  <h1>Your Heart Deserves a<br><em>Smarter</em> Medicine</h1>
+  <p class="hero-sub">Millions of heart patients are running out of options — not because the heart can't be helped, but because today's drugs hit a wall. CelerisAI is breaking through it.</p>
+  <div class="hero-badge"><span></span> Next-Generation Cardiovascular Science</div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stat-band">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-number">64<sup>M</sup></div>
+      <div class="stat-label">People worldwide living with heart failure</div>
+      <div class="stat-sub">5-Year Mortality ~50%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">1.28<sup>B</sup></div>
+      <div class="stat-label">Adults globally with high blood pressure</div>
+      <div class="stat-sub">46% don't even know it</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">32<sup>M</sup></div>
+      <div class="stat-label">HFpEF patients with zero effective therapies</div>
+      <div class="stat-sub">The forgotten half of heart failure</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">57<sup>%</sup></div>
+      <div class="stat-label">5-year survival in Pulmonary Arterial Hypertension</div>
+      <div class="stat-sub">Despite best-in-class standard of care</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM SECTION -->
+<section>
+  <div class="section-wrap">
+    <p class="section-label">The Problem</p>
+    <h2 class="section-h2">Current Heart Drugs Are Running Out of Road</h2>
+    <div class="divider"></div>
+    <p class="body-p">Think of your blood vessels like pipes carrying water. In a healthy heart, your body produces a natural molecule called <strong>Nitric Oxide (NO)</strong> — a built-in signal that tells your blood vessels to relax and widen, letting blood flow freely.</p>
+    <p class="body-p">But in a failing heart, this Nitric Oxide supply dries up. And here's the critical problem: <strong>almost every drug used today relies on that Nitric Oxide signal to work.</strong> No signal, no effect.</p>
+    <p class="body-p">It's like trying to boost a phone's Wi-Fi signal when the router itself is switched off. The problem isn't the phone — it's that the signal source is gone.</p>
+    <div class="info-box">
+      <p>"Traditional therapeutics that rely on amplifying existing NO streams become physiologically useless as the disease progresses."</p>
+      <cite>CelerisAI Clinical Overview</cite>
+    </div>
+  </div>
+</section>
+
+<!-- MECHANISM -->
+<section class="mech-section">
+  <div class="section-wrap">
+    <p class="section-label">The Solution</p>
+    <h2 class="section-h2">CelerisAI Bypasses the Broken Signal Entirely</h2>
+    <p class="body-p">Instead of trying to amplify a Nitric Oxide signal that no longer exists, CelerisAI's molecule goes directly to the heart of the problem — activating two key biological switches without needing Nitric Oxide at all.</p>
+
+    <div class="mech-grid">
+      <div class="mech-card blue-card">
+        <span class="mech-icon">🔵</span>
+        <h3>Switch #1: The cGC Pathway</h3>
+        <p>This pathway directly relaxes and widens blood vessels — reducing the strain on your heart without relying on any upstream signals.</p>
+        <div class="mech-bullets">
+          <div class="mech-bullet">Potent vasodilation even in a NO-depleted environment</div>
+          <div class="mech-bullet">Actively fights scarring and stiffening of heart tissue (anti-fibrosis)</div>
+          <div class="mech-bullet">Inhibits dangerous blood clots from forming</div>
+        </div>
+      </div>
+      <div class="mech-card gold-card">
+        <span class="mech-icon">🟡</span>
+        <h3>Switch #2: The cAMP Pathway</h3>
+        <p>This pathway supercharges the heart's pumping and filling ability — completely independently of the adrenaline system, avoiding the dangerous side effects of older drugs.</p>
+        <div class="mech-bullets">
+          <div class="mech-bullet">Stronger heart contractions without increased oxygen demand</div>
+          <div class="mech-bullet">Better diastolic (filling) function — the core of HFpEF</div>
+          <div class="mech-bullet">Broad anti-inflammatory effects across the heart muscle</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-box">
+      <p>"By directly activating both pathways from within, the molecule operates at full efficacy even in low-NO, failing-heart environments — a first of its kind."</p>
+      <cite>CelerisAI Mechanism Overview</cite>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare-section">
+  <div class="section-wrap">
+    <p class="section-label">How We Compare</p>
+    <h2 class="section-h2">Why Current Options Fall Short</h2>
+    <p class="body-p">Every existing drug checks some boxes. None checks all of them. CelerisAI is designed to be the first.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Drug / Therapy</th>
+          <th>Sustained Effect</th>
+          <th>NO-Independent</th>
+          <th>Dual Pathway</th>
+          <th>Safe Profile</th>
+          <th>Heart Failure</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nitrates (nitroglycerin)<br><span style="font-size:11px;color:var(--muted);font-weight:300;">Loses effect in 24–48 hrs</span></td>
+          <td><span class="cross">✗</span></td><td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>sGC Stimulators (vericiguat)<br><span style="font-size:11px;color:var(--muted);font-weight:300;">Still needs some NO to work</span></td>
+          <td><span class="partial">~</span></td><td><span class="partial">~</span></td>
+          <td><span class="partial">~</span></td><td><span class="partial">~</span></td><td><span class="partial">~</span></td>
+        </tr>
+        <tr>
+          <td>PDE5 Inhibitors (sildenafil)<br><span style="font-size:11px;color:var(--muted);font-weight:300;">Not approved for heart failure</span></td>
+          <td><span class="cross">✗</span></td><td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>Hydralazine<br><span style="font-size:11px;color:var(--muted);font-weight:300;">Reflex tachycardia risk</span></td>
+          <td><span class="partial">~</span></td><td><span class="partial">~</span></td>
+          <td><span class="partial">~</span></td><td><span class="partial">~</span></td><td><span class="partial">~</span></td>
+        </tr>
+        <tr class="highlight-row">
+          <td><strong>CelerisAI Dual Activator</strong><br><span style="font-size:11px;color:var(--blue);font-weight:400;">NO-independent · Dual pathway · Oral</span></td>
+          <td><span class="check">✓</span></td><td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TAM -->
+<section class="tam-section">
+  <div class="section-wrap">
+    <p class="section-label">The Opportunity</p>
+    <h2 class="section-h2">A $70 Billion Market — and a Gap No One Has Filled</h2>
+    <p class="body-p">Three massive patient populations. Three conditions where current medicine is failing. One platform molecule designed to address all of them.</p>
+
+    <div class="tam-bars">
+      <div class="tam-bar-wrap">
+        <div class="tam-bar-val">$35B</div>
+        <div class="tam-bar" style="height:75%; background:linear-gradient(180deg,#c8dff5 0%,#5a9fd4 100%);"></div>
+        <div class="tam-bar-name">Heart Failure<br>(All Types)</div>
+      </div>
+      <div class="tam-bar-wrap">
+        <div class="tam-bar-val">$28B</div>
+        <div class="tam-bar" style="height:60%; background:linear-gradient(180deg,#fde8c0 0%,#d4941f 100%);"></div>
+        <div class="tam-bar-name">Hypertension</div>
+      </div>
+      <div class="tam-bar-wrap">
+        <div class="tam-bar-val">$7B</div>
+        <div class="tam-bar" style="height:22%; background:linear-gradient(180deg,#e8d8f8 0%,#9b6ecf 100%);"></div>
+        <div class="tam-bar-name">Pulmonary Arterial<br>Hypertension (PAH)</div>
+      </div>
+    </div>
+
+    <div class="tam-total">
+      <div>
+        <div class="tam-total-label">Total Addressable Market</div>
+        <div class="tam-total-val">$70 Billion</div>
+      </div>
+      <div class="tam-total-desc">No existing oral drug delivers sustained, NO-independent vasodilation with synergistic dual-pathway activation. CelerisAI is the first designed specifically to do so.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>The Heart Failure Crisis Needs a<br><em>New Answer</em></h2>
+  <p>CelerisAI is building that answer — a novel molecule designed from first principles to work where everything else has stopped working.</p>
+  <div class="cta-buttons">
+    <a href="mailto:dr.chintanraval09@gmail.com" class="btn-primary">Connect with Dr. Raval</a>
+    <a href="tel:+919408572629" class="btn-secondary">+91 94085 72629</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Celeris<span>AI</span></div>
+  <div class="footer-tagline">Next-Generation Cardiovascular Vasodilation</div>
+  <div class="footer-contact">
+    Dr. Chintan Raval · Founder<br>
+    <a href="mailto:dr.chintanraval09@gmail.com">dr.chintanraval09@gmail.com</a> &nbsp;·&nbsp;
+    <a href="tel:+919408572629">(+91) 9408572629</a>
+  </div>
+</footer>
+
+</body>
+</html>
