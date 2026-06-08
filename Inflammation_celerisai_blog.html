@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When the Body Attacks Itself | CelerisAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-deep:#1a5f7a;--teal-mid:#2d8fa8;--teal-light:#5bbcd4;
+  --teal-pale:#e0f4f9;--teal-mist:#f0fafc;
+  --coral:#e8614a;--coral-light:#f4a08a;--coral-pale:#fef0ec;
+  --gold:#c8920a;--gold-light:#f5d48a;--gold-pale:#fdf7e8;
+  --sage:#3a7a5a;--sage-light:#6aaa8a;--sage-pale:#eaf5ef;
+  --warm-white:#fdfcfa;--slate:#3d5a6a;--slate-mid:#5a7a8a;
+  --rule:#c8e4ed;--text-body:#2a4855;--text-light:#5a7a8a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--warm-white);color:var(--text-body);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.85;overflow-x:hidden;}
+
+/* ── MASTHEAD ── */
+.masthead{background:var(--teal-deep);padding:0 56px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.brand{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:white;letter-spacing:.06em;}
+.brand span{color:var(--teal-light);}
+.nav-tag{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+
+/* ── HERO ── */
+.hero{position:relative;width:100%;min-height:72vh;background:linear-gradient(165deg,#0a2d3e 0%,#1a5f7a 42%,#1e6e8a 72%,#0e4060 100%);overflow:hidden;display:flex;align-items:center;}
+.hero-rings{position:absolute;inset:0;pointer-events:none;}
+.hr{position:absolute;border-radius:50%;border:1px solid rgba(91,188,212,.09);}
+.hr1{width:640px;height:640px;right:-180px;top:-160px;animation:rp 9s ease-in-out infinite;}
+.hr2{width:420px;height:420px;right:-40px;top:20px;animation:rp 9s 1.8s ease-in-out infinite;}
+.hr3{width:220px;height:220px;right:120px;top:180px;animation:rp 9s 3.6s ease-in-out infinite;}
+@keyframes rp{0%,100%{opacity:.2;transform:scale(1);}50%{opacity:.55;transform:scale(1.04);}}
+.hero-inner{position:relative;z-index:10;padding:80px 56px 88px;max-width:860px;animation:fr .9s ease both;}
+@keyframes fr{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--coral-light);margin-bottom:22px;}
+.kicker::before{content:'';width:28px;height:1.5px;background:var(--coral-light);}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.06;color:white;margin-bottom:22px;letter-spacing:-.02em;}
+.hero h1 em{font-style:italic;color:var(--teal-light);}
+.hero-deck{font-size:1.05rem;color:rgba(255,255,255,.72);max-width:620px;line-height:1.74;margin-bottom:32px;}
+
+/* ── AUTHOR ── */
+.author-block{display:flex;align-items:center;gap:16px;padding:18px 0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--teal-light),var(--teal-mid));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:white;flex-shrink:0;}
+.author-name{font-size:.88rem;font-weight:600;color:white;}
+.author-role{font-size:.73rem;color:rgba(255,255,255,.5);margin-top:2px;}
+.hero-meta{display:flex;gap:22px;margin-top:12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+
+/* ── ARTICLE ── */
+.article{max-width:760px;margin:0 auto;padding:72px 40px 90px;}
+p{font-size:1.04rem;margin-bottom:1.6rem;color:var(--text-body);line-height:1.85;}
+strong{font-weight:600;color:var(--teal-deep);}
+
+h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--teal-deep);line-height:1.2;margin:60px 0 18px;letter-spacing:-.015em;}
+.accent{display:block;width:40px;height:3px;border-radius:2px;margin-bottom:14px;}
+.ac{background:linear-gradient(90deg,var(--coral),var(--coral-light));}
+.at{background:linear-gradient(90deg,var(--teal-light),var(--teal-mid));}
+.ag{background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+.as{background:linear-gradient(90deg,var(--sage),var(--sage-light));}
+
+/* ── DISEASE CARDS ── */
+.disease-row{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:36px -24px;background:var(--rule);border-radius:14px;overflow:hidden;}
+.dc{background:var(--warm-white);padding:24px 20px;transition:background .2s;}
+.dc:hover{background:var(--teal-mist);}
+.dc-tag{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:4px;}
+.dc-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--teal-deep);margin-bottom:8px;}
+.dc-body{font-size:.86rem;color:var(--text-light);line-height:1.58;margin-bottom:0;}
+.dc-alert{grid-column:1/-1;background:var(--teal-deep);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--teal-light);flex-shrink:0;animation:db 2s ease-in-out infinite;}
+@keyframes db{0%,100%{opacity:1}50%{opacity:.2}}
+.dc-alert p{font-size:.74rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-light);margin-bottom:0;}
+
+/* ── STAT ROW ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:44px -40px;background:var(--rule);}
+.sc{padding:34px 22px;text-align:center;background:var(--teal-deep);}
+.sc:nth-child(2){background:var(--teal-mid);}
+.sc:nth-child(3){background:var(--teal-light);}
+.sn{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:white;display:block;line-height:1;margin-bottom:8px;}
+.sc:nth-child(3) .sn{color:var(--teal-deep);}
+.sl{font-size:.72rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.45;}
+.sc:nth-child(3) .sl{color:rgba(42,72,85,.65);}
+
+/* ── TARGET BANNER ── */
+.tbanner{margin:28px -40px 28px;padding:28px 40px;position:relative;overflow:hidden;}
+.tbanner::before{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;opacity:.12;}
+.tb-cor{background:linear-gradient(135deg,var(--coral-pale),#fce8e2);}
+.tb-gld{background:linear-gradient(135deg,var(--gold-pale),#fcefd4);}
+.tb-sge{background:linear-gradient(135deg,var(--sage-pale),#daf0e4);}
+.tb-cor::before{background:var(--coral);}
+.tb-gld::before{background:var(--gold);}
+.tb-sge::before{background:var(--sage);}
+.tb-num{font-size:8px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;margin-bottom:5px;}
+.tb-cor .tb-num{color:var(--coral);}
+.tb-gld .tb-num{color:var(--gold);}
+.tb-sge .tb-num{color:var(--sage);}
+.tb-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;line-height:1.2;margin-bottom:5px;}
+.tb-cor .tb-title{color:var(--coral);}
+.tb-gld .tb-title{color:var(--gold);}
+.tb-sge .tb-title{color:var(--sage);}
+.tb-sub{font-size:.85rem;color:var(--text-light);}
+
+/* ── HIGHLIGHT BOX ── */
+.hbox{margin:28px 0;padding:24px 26px;border-radius:12px;display:flex;gap:14px;align-items:flex-start;}
+.hbox.c{background:var(--coral-pale);border:1.5px solid var(--coral-light);}
+.hbox.g{background:var(--gold-pale);border:1.5px solid var(--gold-light);}
+.hbox.s{background:var(--sage-pale);border:1.5px solid var(--sage-light);}
+.hbox.t{background:var(--teal-mist);border:1.5px solid var(--rule);}
+.hbox-ico{font-size:1.5rem;flex-shrink:0;}
+.hbox-lbl{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:5px;}
+.hbox.c .hbox-lbl{color:var(--coral);}
+.hbox.g .hbox-lbl{color:var(--gold);}
+.hbox.s .hbox-lbl{color:var(--sage);}
+.hbox.t .hbox-lbl{color:var(--teal-mid);}
+.hbox p{font-size:.9rem;color:var(--slate);margin-bottom:0;line-height:1.65;}
+.hbox strong{color:var(--teal-deep);}
+.hbox.c strong{color:var(--coral);}
+.hbox.g strong{color:var(--gold);}
+.hbox.s strong{color:var(--sage);}
+
+/* ── PULL QUOTE ── */
+blockquote{margin:48px -24px;padding:40px 48px;background:var(--teal-deep);position:relative;overflow:hidden;}
+blockquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:9rem;line-height:0;position:absolute;top:48px;left:32px;color:rgba(91,188,212,.15);}
+blockquote p{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;font-weight:700;color:white;line-height:1.55;padding-left:36px;margin-bottom:0;}
+blockquote cite{display:block;padding-left:36px;margin-top:14px;font-family:'DM Sans',sans-serif;font-style:normal;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-light);}
+
+/* ── AI CARDS ── */
+.ai-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0;}
+.ai-card{background:white;border:1.5px solid var(--rule);border-radius:12px;padding:22px 18px;transition:border-color .2s,transform .2s;}
+.ai-card:hover{border-color:var(--teal-light);transform:translateY(-2px);}
+.ai-ico{font-size:1.4rem;margin-bottom:8px;}
+.ai-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--teal-deep);line-height:1;margin-bottom:4px;}
+.ai-label{font-size:.75rem;font-weight:600;color:var(--teal-mid);margin-bottom:5px;}
+.ai-desc{font-size:.76rem;color:var(--text-light);line-height:1.5;margin-bottom:0;}
+
+/* ── SECTION DIVIDER ── */
+.sdiv{display:flex;align-items:center;gap:16px;margin:64px 0 0;}
+.sdiv-line{flex:1;height:1px;background:var(--rule);}
+.sdiv-label{font-size:8px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--text-light);white-space:nowrap;padding:5px 14px;border:1px solid var(--rule);border-radius:100px;}
+
+hr{border:none;border-top:1px solid var(--rule);margin:48px 0;}
+
+/* ── CONTACT BANNER ── */
+.contact-banner{
+  margin:64px -40px 0;
+  background:linear-gradient(145deg,var(--teal-deep) 0%,var(--teal-mid) 60%,#2a9ab8 100%);
+  padding:68px 56px;position:relative;overflow:hidden;
+}
+.contact-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(91,188,212,.16) 0%,transparent 70%);}
+.cb-inner{position:relative;z-index:2;max-width:680px;margin:0 auto;text-align:center;}
+.cb-inner h3{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.8vw,2.5rem);font-weight:900;color:white;line-height:1.15;margin-bottom:14px;}
+.cb-inner h3 em{font-style:italic;color:var(--teal-light);}
+.cb-inner > p{color:rgba(255,255,255,.7);font-size:.98rem;line-height:1.7;margin-bottom:36px;}
+
+/* Three contact cards */
+.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:40px;}
+.cc{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:24px 18px;text-align:center;transition:background .2s;}
+.cc:hover{background:rgba(255,255,255,.15);}
+.cc-ico{font-size:1.6rem;margin-bottom:10px;}
+.cc-title{font-size:.85rem;font-weight:700;color:white;margin-bottom:6px;}
+.cc-desc{font-size:.76rem;color:rgba(255,255,255,.55);line-height:1.5;margin-bottom:0;}
+
+/* Contact details box */
+.contact-box{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:30px 28px;text-align:left;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.contact-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--teal-light),var(--teal-mid));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:white;flex-shrink:0;}
+.contact-info{flex:1;min-width:200px;}
+.contact-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:white;margin-bottom:3px;}
+.contact-role{font-size:.76rem;color:rgba(255,255,255,.55);margin-bottom:14px;}
+.contact-links{display:flex;gap:12px;flex-wrap:wrap;}
+.clink{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:8px 18px;font-size:.78rem;font-weight:500;color:white;text-decoration:none;letter-spacing:.04em;transition:background .2s;}
+.clink:hover{background:rgba(255,255,255,.22);}
+
+@media(max-width:640px){
+  .masthead{padding:0 20px;}
+  .hero-inner{padding:56px 24px 64px;}
+  .article{padding:48px 24px 72px;}
+  .disease-row{grid-template-columns:1fr;margin-left:-24px;margin-right:-24px;}
+  .stats{grid-template-columns:1fr;margin-left:-24px;margin-right:-24px;}
+  .ai-row,.contact-cards{grid-template-columns:1fr;}
+  blockquote{margin:40px -24px;padding:32px 24px;}
+  blockquote p{padding-left:22px;font-size:1.1rem;}
+  blockquote cite{padding-left:22px;}
+  .tbanner{margin-left:-24px;margin-right:-24px;padding:24px;}
+  .contact-banner{margin-left:-24px;margin-right:-24px;padding:48px 24px;}
+  .contact-box{flex-direction:column;gap:16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<nav class="masthead">
+  <div class="brand">Celeris<span>AI</span></div>
+  <div class="nav-tag">Innovation · Health · AI</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-rings">
+    <div class="hr hr1"></div><div class="hr hr2"></div><div class="hr hr3"></div>
+  </div>
+  <div class="hero-inner">
+    <p class="kicker">CelerisAI · May 2026</p>
+    <h1>When the Body<br><em>Attacks Itself</em> —<br>And How We Stop It</h1>
+    <p class="hero-deck">Millions of people suffer from heart attacks, lung diseases, and breathing conditions that share the same hidden root cause. CelerisAI has identified three molecular switches that control this crisis — and is using AI to design a single medicine to address all three at once.</p>
+
+    <div class="author-block">
+      <div class="av">CR</div>
+      <div>
+        <div class="author-name">Dr. Chintan Raval</div>
+        <div class="author-role">CEO &amp; Founder, CelerisAI</div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <span>CelerisAI</span>
+      <span>May 2026</span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article">
+
+  <!-- INTRO -->
+  <p>Every second, somewhere in the world, a person's body runs out of oxygen in a place it shouldn't. A blood vessel gets blocked. Airways narrow. Lung tissue scars. And when that happens, something unexpected follows — the body doesn't just weaken. It turns on itself.</p>
+
+  <p>The immune system, designed to protect us, goes into overdrive. It floods the body with inflammatory signals — far more than are needed — and in doing so, destroys healthy tissue in organs that had nothing wrong with them. A heart attack damages the kidneys. A lung condition destroys the heart. The original problem triggers a chain reaction that medicine, until now, has had no precise way to stop.</p>
+
+  <p>This is the shared root of four of the world's most devastating diseases — and it is the problem CelerisAI was built to solve.</p>
+
+  <!-- DISEASE CARDS -->
+  <div class="disease-row">
+    <div class="dc">
+      <div class="dc-tag">Ischemia</div>
+      <div class="dc-title">World's #1 Killer</div>
+      <p class="dc-body">When an artery is blocked, the tissue it feeds instantly runs out of oxygen. Cells die, organs fail, and a wave of inflammation spreads far beyond the original blockage — damaging the heart, kidneys, and blood vessels simultaneously.</p>
+    </div>
+    <div class="dc">
+      <div class="dc-tag">COPD</div>
+      <div class="dc-title">World's #3 Killer</div>
+      <p class="dc-body">Damaged airways can't deliver enough oxygen. The body lives in a state of constant low-grade oxygen starvation that relentlessly inflames and destroys lung tissue — with no treatment to stop it progressing.</p>
+    </div>
+    <div class="dc">
+      <div class="dc-tag">Pulmonary Fibrosis</div>
+      <div class="dc-title">Terminal</div>
+      <p class="dc-body">Scar tissue slowly replaces healthy lung, making it harder to breathe with every passing month. The inflammation driven by this oxygen shortage accelerates the very scarring that's choking the patient. A lung transplant is often the only option — and suitable donors are desperately scarce.</p>
+    </div>
+    <div class="dc">
+      <div class="dc-tag">PAH</div>
+      <div class="dc-title">Fatal Without Transplant</div>
+      <p class="dc-body">Blood vessels in the lungs thicken and narrow under constant inflammatory pressure, forcing the heart to work impossibly hard until it fails. Patients gasp for breath doing ordinary tasks. There is no cure.</p>
+    </div>
+    <div class="dc-alert">
+      <div class="dot"></div>
+      <p>No approved medicine currently stops the underlying inflammatory cascade driving all four conditions.</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="sc"><span class="sn">500M+</span><span class="sl">People worldwide living with these four oxygen-crisis diseases</span></div>
+    <div class="sc"><span class="sn">18M+</span><span class="sl">Deaths every year from ischemic disease alone — one every two seconds</span></div>
+    <div class="sc"><span class="sn">Zero</span><span class="sl">Therapies that stop the cellular inflammation cascade at its root</span></div>
+  </div>
+
+  <!-- COVID EXAMPLE -->
+  <h2><span class="accent ac"></span>COVID-19 Showed Us Exactly How This Kills</h2>
+
+  <p>The pandemic gave us an unforgettable lesson in how oxygen starvation and runaway inflammation work together. The virus itself wasn't the primary killer in severe COVID-19 cases. What killed people was the chain reaction it started — the immune system's catastrophic overreaction to the oxygen crisis the virus caused.</p>
+
+  <p>Patients whose lungs couldn't absorb enough oxygen sent distress signals that triggered a <strong>"cytokine storm"</strong> — a massive inflammatory explosion that attacked not just the lungs, but the heart, kidneys, liver, and blood vessels simultaneously. Many patients who survived the initial viral infection died weeks later from this inflammatory aftermath, not from the virus itself.</p>
+
+  <div class="hbox c">
+    <div class="hbox-ico">💡</div>
+    <div>
+      <div class="hbox-lbl">The Key Insight</div>
+      <p>The steroid drug dexamethasone — which dampens inflammation broadly — reduced severe COVID-19 deaths by 35%. This confirmed what scientists had long suspected: <strong>inflammation, not the original trigger, was doing most of the killing.</strong> But broad steroids come with serious side effects. What was needed was a precise, targeted way to stop the inflammatory cascade without suppressing the entire immune system. That is exactly what CelerisAI is building.</p>
+    </div>
+  </div>
+
+  <!-- THE THREE SWITCHES -->
+  <h2><span class="accent at"></span>Three Switches. One Crisis.</h2>
+
+  <p>When oxygen runs out inside a cell, three molecular systems are thrown into disarray — and all three need to be brought back under control at the same time. Think of them as three switches that all get flipped the wrong way when the body is under oxygen stress.</p>
+
+  <!-- TARGET 1 -->
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">Switch One</div><div class="sdiv-line"></div></div>
+
+  <div class="tbanner tb-cor">
+    <div class="tb-num">Target 01 of 03</div>
+    <div class="tb-title">NLRP3 — The Fire Alarm Stuck in the On Position</div>
+    <div class="tb-sub">The molecule primarily responsible for triggering the body's runaway inflammatory storm</div>
+  </div>
+
+  <p>Deep inside immune cells sits a molecular alarm system called NLRP3. In a healthy body, it fires when there's a genuine threat, calls in the immune system, and then switches off. But in ischemia, COPD, fibrosis, and PAH, this alarm gets stuck in the "on" position — constantly broadcasting an emergency signal that the immune system responds to, over and over, long after the original crisis has passed.</p>
+
+  <p>The result is a continuous flood of inflammatory chemicals that destroy healthy tissue in the heart, lungs, kidneys, and blood vessels. It is the primary engine of the damage that kills people — not the blocked artery, not the scarred lung tissue, but this relentless, misfiring alarm. <strong>Switch off NLRP3, and you stop the fire at its source.</strong></p>
+
+  <div class="hbox c">
+    <div class="hbox-ico">🔥</div>
+    <div>
+      <div class="hbox-lbl">Why it matters</div>
+      <p>NLRP3 is also responsible for a particularly violent form of cell death — where cells essentially explode, releasing their contents into surrounding tissue and spreading the alarm signal even further. This self-amplifying destruction is why these diseases progress even when the original trigger has been partially treated.</p>
+    </div>
+  </div>
+
+  <!-- TARGET 2 -->
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">Switch Two</div><div class="sdiv-line"></div></div>
+
+  <div class="tbanner tb-gld">
+    <div class="tb-num">Target 02 of 03</div>
+    <div class="tb-title">HIF-1α — The Cell's Emergency Commander Gone Rogue</div>
+    <div class="tb-sub">The master regulator that tells cells how to respond to low oxygen — and what goes wrong when it never switches off</div>
+  </div>
+
+  <p>Every cell in your body has a built-in oxygen detector — a protein called HIF-1α. When oxygen levels drop, HIF-1α activates and acts like an emergency commander, switching on dozens of survival programmes: growing new blood vessels, changing how the cell makes energy, producing more red blood cells. In the short term, this is genuinely protective and essential.</p>
+
+  <p>The problem is that in chronic oxygen-related disease, HIF-1α never switches off. It stays permanently active, and the "emergency programmes" it keeps running eventually start causing damage — thickening blood vessel walls, driving the scarring process in the lungs, and amplifying the very inflammatory signals that NLRP3 is already flooding the body with.</p>
+
+  <div class="hbox g">
+    <div class="hbox-ico">⚙️</div>
+    <div>
+      <div class="hbox-lbl">The nuance</div>
+      <p>CelerisAI doesn't aim to simply block HIF-1α — that would also knock out its protective effects. The goal is to <strong>calibrate it</strong>: keep the helpful emergency responses running while preventing the chronic overactivation that drives disease. This level of precision is only achievable through AI-designed molecular engineering.</p>
+    </div>
+  </div>
+
+  <!-- TARGET 3 -->
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">Switch Three</div><div class="sdiv-line"></div></div>
+
+  <div class="tbanner tb-sge">
+    <div class="tb-num">Target 03 of 03</div>
+    <div class="tb-title">Nrf2 / HO-1 / Carbon Monoxide — The Body's Own Shield, Switched Off</div>
+    <div class="tb-sub">The most powerful protective system the human body possesses — and why restoring it changes everything</div>
+  </div>
+
+  <p>Here is perhaps the most important thing to understand about these diseases: <strong>the body already has the tools to protect itself.</strong> There is a molecular system — controlled by a protein called Nrf2 — that, when fully active, switches on over 200 protective and anti-inflammatory proteins simultaneously. It is the cell's most comprehensive natural defence programme.</p>
+
+  <p>One of the most important proteins Nrf2 activates is called HO-1 (Heme Oxygenase-1). When HO-1 is produced, it creates three protective byproducts — including a tiny amount of carbon monoxide. At the microscopic quantities the body produces naturally, carbon monoxide is not toxic. It is a powerful signalling molecule that actively reduces inflammation, prevents unnecessary cell death, and neutralises the chemical damage caused by the inflammatory process.</p>
+
+  <div class="hbox s">
+    <div class="hbox-ico">🛡</div>
+    <div>
+      <div class="hbox-lbl">The tragedy</div>
+      <p>In ischemia, COPD, fibrosis, and PAH, the Nrf2 system is suppressed — <strong>switched off at precisely the moment the body needs it most.</strong> Over 200 protective proteins that could be defending the cell are never produced. CelerisAI's molecule is designed to switch this system back on, restoring the body's own most sophisticated natural shield — from the inside.</p>
+    </div>
+  </div>
+
+  <blockquote>
+    <p>The body already knows how to protect itself. It has the tools. In these diseases, those tools get switched off. Our job — with AI — is to switch them back on.</p>
+    <cite>— Dr. Chintan Raval, CEO &amp; Founder, CelerisAI</cite>
+  </blockquote>
+
+  <!-- AI SECTION -->
+  <h2><span class="accent at"></span>Why AI Changes Everything</h2>
+
+  <p>Designing a single medicine that precisely controls all three of these switches simultaneously — without unwanted side effects — is one of the hardest problems in drug discovery. The traditional approach of testing thousands of molecules in a laboratory, one by one, would take decades and billions of pounds. The vast majority of candidates would fail.</p>
+
+  <p>CelerisAI uses artificial intelligence and machine learning to do this computationally. Our AI models can screen millions of potential molecules virtually, predicting how each one would interact with all three targets at once, identifying toxic candidates before any lab work begins, and generating novel molecular designs that no human chemist would have thought to try. The result: faster discovery, dramatically lower costs, and a much higher probability of finding a molecule that actually works.</p>
+
+  <div class="ai-row">
+    <div class="ai-card">
+      <div class="ai-ico">⏱</div>
+      <div class="ai-num">70%</div>
+      <div class="ai-label">Faster Discovery</div>
+      <p class="ai-desc">AI compresses years of laboratory screening into months of computation — getting promising molecules to the clinic far sooner.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-ico">💰</div>
+      <div class="ai-num">30–70%</div>
+      <div class="ai-label">Cost Reduction</div>
+      <p class="ai-desc">By eliminating failing molecules computationally — before expensive physical testing — AI dramatically reduces the cost of finding what works.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-ico">🎯</div>
+      <div class="ai-num">6×</div>
+      <div class="ai-label">Fewer Failures</div>
+      <p class="ai-desc">AI toxicity prediction is up to six times more accurate than conventional screening — catching dangerous candidates before they reach patients.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <p>The diseases CelerisAI is targeting — ischemia, COPD, pulmonary fibrosis, and PAH — affect over 500 million people globally. They are among the leading causes of death and hospitalisation worldwide. And for all of them, the current standard of care manages symptoms without addressing the cellular crisis driving the disease forward.</p>
+
+  <p>We believe that is not good enough. The body's own molecular machinery holds the key to stopping the destruction — and AI gives us the precision to unlock it. That is what CelerisAI is building.</p>
+
+</div>
+
+<!-- CONTACT BANNER -->
+<div class="contact-banner">
+  <div class="cb-inner">
+    <h3>Work With <em>CelerisAI</em></h3>
+    <p>We are actively seeking partners across pharma, biotech, academia, and investment to accelerate the development of our multimodal cytoprotective programme. If you share our conviction that this problem is solvable — we would like to hear from you.</p>
+
+    <div class="contact-cards">
+      <div class="cc">
+        <div class="cc-ico">🤝</div>
+        <div class="cc-title">Co-Development</div>
+        <p class="cc-desc">Joint preclinical and clinical development programmes in ischemia, COPD, IPF, and PAH with our AI-designed lead molecule.</p>
+      </div>
+      <div class="cc">
+        <div class="cc-ico">🔬</div>
+        <div class="cc-title">R&amp;D Collaboration</div>
+        <p class="cc-desc">Academic and institutional partnerships for mechanistic studies, target validation, and biomarker discovery in hypoxic-inflammatory disease.</p>
+      </div>
+      <div class="cc">
+        <div class="cc-ico">📈</div>
+        <div class="cc-title">Investment</div>
+        <p class="cc-desc">We welcome conversations with investors aligned with our mission to bring the first multimodal cytoprotective therapy to patients globally.</p>
+      </div>
+    </div>
+
+    <div class="contact-box">
+      <div class="contact-av">CR</div>
+      <div class="contact-info">
+        <div class="contact-name">Dr. Chintan Raval</div>
+        <div class="contact-role">CEO &amp; Founder, CelerisAI &nbsp;·&nbsp; Drug Discovery · AI/ML · Translational Medicine</div>
+        <div class="contact-links">
+          <a href="mailto:dr.chintanraval09@gmail.com" class="clink">
+            <span>✉</span> dr.chintanraval09@gmail.com
+          </a>
+          <a href="http://linkedin.com/in/drchintanraval/" target="_blank" class="clink">
+            <span>in</span> linkedin.com/in/drchintanraval
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

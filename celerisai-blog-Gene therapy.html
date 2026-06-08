@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decoding the Cure for the World | CelerisAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --crimson: #8b1c2e;
+    --gold: #b8965a;
+    --slate: #4a5568;
+    --light-rule: #e2d9cc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 100px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(139,28,46,0.25) 0%, transparent 65%);
+  }
+  .hero-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    font-size: 13px;
+    color: rgba(245,240,232,0.55);
+    border-top: 1px solid rgba(245,240,232,0.15);
+    padding-top: 24px;
+    margin-top: 36px;
+  }
+  .hero-deck {
+    font-size: 1.15rem;
+    color: rgba(245,240,232,0.78);
+    line-height: 1.75;
+    max-width: 620px;
+    font-weight: 300;
+  }
+
+  /* ── ARTICLE BODY ── */
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 40px 100px;
+  }
+
+  /* Drop cap */
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.4rem;
+    font-weight: 900;
+    float: left;
+    line-height: 0.82;
+    margin-right: 10px;
+    margin-top: 8px;
+    color: var(--crimson);
+  }
+
+  p {
+    font-size: 1.05rem;
+    margin-bottom: 1.6rem;
+    color: #2d2620;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 56px 0 20px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  h2::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    background: var(--crimson);
+    margin-bottom: 18px;
+  }
+
+  /* Pull quote */
+  blockquote {
+    border-left: none;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 40px 48px;
+    margin: 48px -40px;
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+  blockquote::before {
+    content: '\201C';
+    font-size: 6rem;
+    line-height: 0;
+    color: var(--gold);
+    position: absolute;
+    top: 36px;
+    left: 28px;
+    font-family: 'Playfair Display', serif;
+    opacity: 0.6;
+  }
+  blockquote p {
+    color: var(--cream);
+    margin-bottom: 0;
+    padding-left: 32px;
+    font-size: 1.3rem;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 16px;
+    padding-left: 32px;
+  }
+
+  /* Stat callout */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 48px -40px;
+    background: var(--light-rule);
+  }
+  .stat-cell {
+    background: var(--cream);
+    padding: 36px 28px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--crimson);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    line-height: 1.4;
+  }
+
+  /* Pipeline steps */
+  .pipeline {
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .pipeline-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 24px;
+    background: var(--cream);
+    border-left: 4px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .pipeline-step:hover { border-color: var(--gold); }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--gold);
+    min-width: 28px;
+    line-height: 1;
+    padding-top: 2px;
+  }
+  .step-body strong {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .step-body p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    color: var(--slate);
+  }
+
+  /* Horizontal rule */
+  hr {
+    border: none;
+    border-top: 1px solid var(--light-rule);
+    margin: 48px 0;
+  }
+
+  /* CTA footer */
+  .cta-block {
+    background: linear-gradient(135deg, var(--crimson) 0%, #5c0f1d 100%);
+    color: white;
+    padding: 56px 48px;
+    margin: 64px -40px -100px;
+    text-align: center;
+  }
+  .cta-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .cta-block p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto 28px;
+  }
+  .cta-btn {
+    display: inline-block;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    padding: 12px 36px;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .cta-btn:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 64px 24px 56px; }
+    article { padding: 48px 24px 72px; }
+    blockquote { margin: 40px -24px; padding: 32px 28px; }
+    .stat-row { grid-template-columns: 1fr; margin: 40px -24px; }
+    .cta-block { margin: 56px -24px -72px; padding: 40px 24px; }
+    blockquote p { padding-left: 24px; font-size: 1.1rem; }
+    blockquote cite { padding-left: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">CelerisAI · Gene Therapy · AI-Driven Discovery</p>
+    <h1>Decoding the <em>Cure</em><br>for the World</h1>
+    <p class="hero-deck">
+      Muscular Dystrophy gene therapy exists. It works. At $3.2 million per dose, it's also one of the most exclusionary treatments in history. CelerisAI is here to change that — with AI.
+    </p>
+    <div class="hero-meta">
+      <span>CelerisAI Research</span>
+      <span>May 2026</span>
+      <span>8 min read</span>
+    </div>
+  </div>
+</header>
+
+<article>
+
+  <p class="drop-cap">Imagine watching your child learn to walk — then slowly, inevitably, lose that ability. That is the reality for tens of thousands of families living with Duchenne Muscular Dystrophy (DMD), a rare genetic disease that strikes primarily in early childhood and follows a merciless, predictable path: falls and delayed milestones, then wheelchair dependence by the early teens, then respiratory failure, then a drastically shortened life.</p>
+
+  <p>The science to fight this disease now exists. Gene therapy — specifically, the use of engineered viral vectors to deliver a corrected genetic blueprint directly into muscle cell nuclei — has produced genuine, documented breakthroughs. The FDA has approved treatments. Children have been helped.</p>
+
+  <p>But there is a brutal asterisk on every one of these victories: the treatment costs approximately <strong>$3.2 million per dose</strong>.</p>
+
+  <div class="stat-row">
+    <div class="stat-cell">
+      <span class="stat-number">$3.2M</span>
+      <span class="stat-label">Cost per dose of FDA-approved gene therapy (e.g., Elevidys)</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-number">~300M</span>
+      <span class="stat-label">People in the Global South with zero access to modern gene therapy</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-number">Decades</span>
+      <span class="stat-label">Traditional pharma R&D timeline that inflates cost to patients</span>
+    </div>
+  </div>
+
+  <h2>A Structural Failure at the Cellular Level</h2>
+
+  <p>To understand why CelerisAI exists, you first need to understand what Muscular Dystrophy actually is at a biological level. It is, at its core, a structural failure.</p>
+
+  <p>Healthy muscle tissue relies on a protein called <strong>dystrophin</strong> — a molecular bridge that anchors the muscle fiber's internal contractile machinery to its outer membrane. Every time a healthy muscle contracts, dystrophin absorbs the mechanical stress, keeping the cell intact. In DMD, a genetic mutation disrupts the production of this protein entirely.</p>
+
+  <p>Without dystrophin, every ordinary movement — every step, every reach, every breath — physically tears the muscle cells apart from the inside. The body attempts to repair the damage, but over time, the regenerative capacity is overwhelmed. Muscle tissue is progressively replaced by fat and fibrotic scarring. The loss is permanent and irreversible.</p>
+
+  <blockquote>
+    <p>Drug discovery is no longer just a biological mystery; it is a data problem. The massive costs and timelines of traditional pharma are not scientific inevitabilities — they are computational inefficiencies.</p>
+    <cite>— CelerisAI Core Thesis</cite>
+  </blockquote>
+
+  <h2>Why a Cure Costs $3.2 Million</h2>
+
+  <p>Gene therapy works. Engineered viral vectors — harmless, reprogrammed viruses — can be designed to specifically target damaged muscle tissue, penetrate the cell membrane, and deliver a corrected genetic blueprint directly into the nucleus. Once inside, the cell begins manufacturing its own functional dystrophin. Disease progression halts.</p>
+
+  <p>The science is not the problem. The economics are.</p>
+
+  <p>Traditional pharmaceutical R&D relies on a model of <em>physical trial and error</em>: blind screening of thousands of compounds, physical synthesis, laboratory iteration, off-target toxicity testing, and catastrophically high failure rates across every stage. Each failed clinical trial costs tens or hundreds of millions of dollars. And under the legacy model, every one of those failed trials is ultimately paid for by the patient who receives the eventual successful drug.</p>
+
+  <p>The $3.2 million price tag on today's gene therapy is not simply profit — it is the accumulated cost of decades of inefficiency, baked into a single vial.</p>
+
+  <h2>The CelerisAI Pipeline: Computation Replaces Chance</h2>
+
+  <p>CelerisAI was founded on a conviction that reframes the entire problem: drug discovery is a data problem. And data problems are solvable at scale, at speed, and at a fraction of the cost of physical experimentation.</p>
+
+  <p>The CelerisAI ML pipeline replaces the three most expensive stages of traditional gene therapy development with computational solutions:</p>
+
+  <div class="pipeline">
+    <div class="pipeline-step">
+      <span class="step-num">01</span>
+      <div class="step-body">
+        <strong>Algorithmic Vector Delivery Optimization</strong>
+        <p>Instead of physically testing thousands of viral vector configurations, AI models predict optimal delivery mechanisms in silico — targeting efficiency, tissue specificity, and immune evasion — before a single lab experiment begins.</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <span class="step-num">02</span>
+      <div class="step-body">
+        <strong>In-Silico Toxicity Prediction</strong>
+        <p>Off-target toxicity is one of the leading causes of clinical trial failure. CelerisAI's predictive models identify dangerous off-target effects computationally, eliminating years of physical safety testing and the catastrophic costs of late-stage failures.</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <span class="step-num">03</span>
+      <div class="step-body">
+        <strong>Generative Payload Simulation</strong>
+        <p>Generative ML models design and simulate optimized genetic payloads — the corrected dystrophin blueprints — modeling their expression, stability, and efficacy before physical synthesis, compressing what was once a decade of work into computational months.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>The cumulative effect is a dramatic compression of the cost waterfall. Failed physical trials — predicted by AI before they happen — are removed. Decades of manual screening — automated by ML — are eliminated. Inefficient vector delivery — optimized by algorithms — is no longer a source of waste. The CelerisAI development baseline is a fraction of the legacy R&D cost.</p>
+
+  <h2>The Geography of Exclusion</h2>
+
+  <p>The access problem for Muscular Dystrophy gene therapy is not subtle. Current pricing models restrict treatment availability almost exclusively to ultra-wealthy healthcare systems in the United States and a handful of Western European nations. The rest of the world — including the entirety of South Asia, Sub-Saharan Africa, Southeast Asia, and Latin America — has effectively zero access to modern gene therapy.</p>
+
+  <p>Millions of pediatric patients across India and emerging markets are not deprioritized, or placed on a waiting list. They are simply abandoned by the current model — not because the cure doesn't exist, but because the economics of how it was developed made global access an afterthought.</p>
+
+  <p>CelerisAI is built with an India-first, Global South-democratized strategy at its core. India provides three structural advantages that make it the ideal launchpad: an unmatched patient population and clinical need to drive economies of scale in manufacturing; a world-class algorithmic and technological infrastructure to support AI-driven deployment; and the geographic and logistical positioning to export an affordable manufacturing blueprint to every emerging market globally.</p>
+
+  <blockquote>
+    <p>A cure is only a cure if it reaches the patient. Technology is only transformative when it is accessible.</p>
+    <cite>— CelerisAI Mission Statement</cite>
+  </blockquote>
+
+  <h2>Rewriting the Economic Model of Global Health</h2>
+
+  <p>What CelerisAI is building is not a cheaper version of an existing drug. It is a fundamentally different economic architecture for how life-saving biological therapies are discovered, developed, and delivered.</p>
+
+  <p>The equation is direct: Advanced AI/ML R&D, combined with scalable manufacturing and delivery in India, produces a cure unbound by geography or wealth. Moving gene therapy from a multimillion-dollar rarity to a scalable, democratized treatment unlocks access for millions of children who have been historically abandoned by a system designed around the ability to pay rather than the urgency of need.</p>
+
+  <p>Every failed clinical trial under the legacy model was ultimately financed by a patient. AI severs that link entirely. The development cost no longer has to be recovered from the suffering.</p>
+
+  <hr>
+
+  <p>The science to end Muscular Dystrophy exists. The computational tools to make its development radically more efficient exist. The manufacturing ecosystems to scale production for global markets exist. What has been missing is the will to combine them — and to refuse to accept that a $3.2 million price tag is anything other than a solvable problem.</p>
+
+  <p>That is what CelerisAI is here to solve.</p>
+
+  <div class="cta-block">
+    <h3>We Are Decoding the Cure for the World</h3>
+    <p>Follow CelerisAI's mission to democratize gene therapy through AI-driven discovery and scalable global access.</p>
+    <a href="#" class="cta-btn">Learn More About CelerisAI</a>
+  </div>
+
+</article>
+
+</body>
+</html>
